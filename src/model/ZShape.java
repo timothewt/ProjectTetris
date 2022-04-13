@@ -93,7 +93,6 @@ public class ZShape extends Tetrominoe {
                     new Coordinates[]{new Coordinates(-1,1),new Coordinates(0,1),new Coordinates(0,0),new Coordinates(1,0)},
                     new Coordinates[]{new Coordinates(0,-1),new Coordinates(0,0),new Coordinates(1,0),new Coordinates(1,1)},
                     new Coordinates[]{new Coordinates(-1,0),new Coordinates(0,0),new Coordinates(0,-1),new Coordinates(1,-1)}, direction);
-            position.setX(position.getX() + direction);
         }
         return grid;
     }
