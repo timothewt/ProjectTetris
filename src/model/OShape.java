@@ -30,39 +30,19 @@ public class OShape extends Tetrominoe {
         }
         return grid;
     }
-
-    @Override
     boolean canMoveSide(Grid grid, int direction) {
-        return false;
+        return switch (direction) {
+            case 1 -> areCellsFree(grid, new Coordinates(0,2), new Coordinates(1,2));
+            case -1 -> areCellsFree(grid, new Coordinates(0,-1), new Coordinates(1,-1));
+            default -> false;
+        };
     }
 
-    @Override
     public Grid moveSide(Grid grid, int direction) {
-        return null;
-    }
-
-    protected boolean canMoveRight(Grid grid) {
-        return areCellsFree(grid, new Coordinates(0,2), new Coordinates(1,2));
-    }
-
-    public Grid moveRight(Grid grid) {
-        if (canMoveRight(grid)) {
+        if (canMoveSide(grid, direction)) {
             grid = setPieceCells(grid, BLACK, new Coordinates(0,0), new Coordinates(0,1), new Coordinates(1,0), new Coordinates(1,1));
-            grid = setPieceCells(grid, color, new Coordinates(0,1), new Coordinates(0,2), new Coordinates(1,1), new Coordinates(1,2));
-            position.setX(position.getX() + 1);
-        }
-        return grid;
-    }
-
-    protected boolean canMoveLeft(Grid grid) {
-        return areCellsFree(grid, new Coordinates(0,-1), new Coordinates(1,-1));
-    }
-
-    public Grid moveLeft(Grid grid) {
-        if (canMoveLeft(grid)) {
-            grid = setPieceCells(grid, BLACK, new Coordinates(0,0), new Coordinates(0,1), new Coordinates(1,0), new Coordinates(1,1));
-            grid = setPieceCells(grid, color, new Coordinates(0,0), new Coordinates(0,-1), new Coordinates(1,0), new Coordinates(1,-1));
-            position.setX(position.getX() - 1);
+            grid = setPieceCells(grid, color, new Coordinates(0,direction), new Coordinates(0,1 + direction), new Coordinates(1,direction), new Coordinates(1,1 + direction));
+            position.setX(position.getX() + direction);
         }
         return grid;
     }
