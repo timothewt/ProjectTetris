@@ -14,8 +14,8 @@ public class LShape extends Tetrominoe {
         return switch (this.orientation % 4) {
             case 0 -> areCellsFree(grid, new Coordinates(-1, 0), new Coordinates(1, 0), new Coordinates(1, 1));
             case 1 -> areCellsFree(grid, new Coordinates(1, -1), new Coordinates(0, -1), new Coordinates(0, 1));
-            case 2 -> areCellsFree(grid, new Coordinates(-1, 0), new Coordinates(1, -1), new Coordinates(1, 0));
-            case 3 -> areCellsFree(grid, new Coordinates(-1, -1), new Coordinates(0, 1), new Coordinates(1, 0));
+            case 2 -> areCellsFree(grid, new Coordinates(-1, -1), new Coordinates(-1, 0), new Coordinates(1, 0));
+            case 3 -> areCellsFree(grid, new Coordinates(-1, 1), new Coordinates(0, -1), new Coordinates(0, 1));
             default -> false;
         };
     }
@@ -24,20 +24,20 @@ public class LShape extends Tetrominoe {
         if (canRotate(grid)) {
             switch (this.orientation % 4) {
                 case 0 -> {
-                    grid = setPieceCells(grid, BLACK, new Coordinates(-1, -1), new Coordinates(-1, 0), new Coordinates(0, 0), new Coordinates(0, 1));
-                    grid = setPieceCells(grid, color, new Coordinates(-1, 1), new Coordinates(0, 0), new Coordinates(0, 1), new Coordinates(1, 0));
+                    grid = setPieceCells(grid, BLACK, new Coordinates(0, -1), new Coordinates(0, 0), new Coordinates(0, 1), new Coordinates(-1, 1));
+                    grid = setPieceCells(grid, color, new Coordinates(-1, 0), new Coordinates(0, 0), new Coordinates(1, 0), new Coordinates(1, 1));
                 }
                 case 1 -> {
-                    grid = setPieceCells(grid, BLACK, new Coordinates(-1, 1), new Coordinates(0, 1), new Coordinates(0, 0), new Coordinates(1, 0));
-                    grid = setPieceCells(grid, color, new Coordinates(0, -1), new Coordinates(0, 0), new Coordinates(1, 0), new Coordinates(1, 1));
+                    grid = setPieceCells(grid, BLACK, new Coordinates(-1, 0), new Coordinates(0, 0), new Coordinates(1, 0), new Coordinates(1, 1));
+                    grid = setPieceCells(grid, color, new Coordinates(1, -1), new Coordinates(0, -1), new Coordinates(0, 0), new Coordinates(0, 1));
                 }
                 case 2 -> {
-                    grid = setPieceCells(grid, BLACK, new Coordinates(0, -1), new Coordinates(0, 0), new Coordinates(1, 0), new Coordinates(1, 1));
-                    grid = setPieceCells(grid, color, new Coordinates(-1, 0), new Coordinates(0, -1), new Coordinates(0, 0), new Coordinates(1, -1));
+                    grid = setPieceCells(grid, BLACK, new Coordinates(1, -1), new Coordinates(0, -1), new Coordinates(0, 0), new Coordinates(0, 1));
+                    grid = setPieceCells(grid, color, new Coordinates(-1, -1), new Coordinates(-1, 0), new Coordinates(0, 0), new Coordinates(1, 0));
                 }
                 case 3 -> {
-                    grid = setPieceCells(grid, BLACK, new Coordinates(-1, 0), new Coordinates(0, 0), new Coordinates(0, -1), new Coordinates(1, -1));
-                    grid = setPieceCells(grid, color, new Coordinates(-1, -1), new Coordinates(-1, 0), new Coordinates(0, 0), new Coordinates(0, 1));
+                    grid = setPieceCells(grid, BLACK, new Coordinates(-1, -1), new Coordinates(-1, 0), new Coordinates(0, 0), new Coordinates(1, 0));
+                    grid = setPieceCells(grid, color, new Coordinates(0, -1), new Coordinates(0, 0), new Coordinates(0, 1), new Coordinates(-1, 1));
                 }
                 default -> {
                 }
@@ -61,7 +61,7 @@ public class LShape extends Tetrominoe {
         if (canMoveDown(grid)) {
             grid = moveDownGlobal(grid, new Coordinates[]{new Coordinates(0,-1),new Coordinates(0,0),new Coordinates(0,1),new Coordinates(-1,1)},
                     new Coordinates[]{new Coordinates(-1,0),new Coordinates(0,0),new Coordinates(1,0),new Coordinates(1,1)},
-                    new Coordinates[]{new Coordinates(0,-1),new Coordinates(0,0),new Coordinates(1,0),new Coordinates(1,-1)},
+                    new Coordinates[]{new Coordinates(0,-1),new Coordinates(0,0),new Coordinates(0,1),new Coordinates(1,-1)},
                     new Coordinates[]{new Coordinates(-1,-1),new Coordinates(-1,0),new Coordinates(0,0),new Coordinates(1,0)});
         }
         return grid;
@@ -78,10 +78,10 @@ public class LShape extends Tetrominoe {
             };
         } else {
             return switch (this.orientation % 4) {
-                case 0 -> areCellsFree(grid, new Coordinates(-1, -2), new Coordinates(0, -1));
-                case 1 -> areCellsFree(grid, new Coordinates(-1, 0), new Coordinates(0, -1), new Coordinates(1, -1));
-                case 2 -> areCellsFree(grid, new Coordinates(0, -2), new Coordinates(1, -1));
-                case 3 -> areCellsFree(grid, new Coordinates(-1, -1), new Coordinates(0, -2), new Coordinates(1, -2));
+                case 0 -> areCellsFree(grid, new Coordinates(0, -2), new Coordinates(-1, 0));
+                case 1 -> areCellsFree(grid, new Coordinates(-1, -1), new Coordinates(0, -1), new Coordinates(1, -1));
+                case 2 -> areCellsFree(grid, new Coordinates(0, -2), new Coordinates(1, -2));
+                case 3 -> areCellsFree(grid, new Coordinates(-1, -2), new Coordinates(0, -1), new Coordinates(1, -1));
                 default -> false;
             };
         }
@@ -91,9 +91,8 @@ public class LShape extends Tetrominoe {
         if (canMoveSide(grid, direction)) {
             grid = moveSideGlobal(grid, new Coordinates[]{new Coordinates(0,-1),new Coordinates(0,0),new Coordinates(0,1),new Coordinates(-1,1)},
                     new Coordinates[]{new Coordinates(-1,0),new Coordinates(0,0),new Coordinates(1,0),new Coordinates(1,1)},
-                    new Coordinates[]{new Coordinates(0,-1),new Coordinates(0,0),new Coordinates(1,0),new Coordinates(1,-1)},
+                    new Coordinates[]{new Coordinates(0,-1),new Coordinates(0,0),new Coordinates(0,1),new Coordinates(1,-1)},
                     new Coordinates[]{new Coordinates(-1,-1),new Coordinates(-1,0),new Coordinates(0,0),new Coordinates(1,0)}, direction);
-            position.setX(position.getX() + direction);
         }
         return grid;
     }

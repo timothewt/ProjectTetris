@@ -70,7 +70,7 @@ public class Grid {
         return grid;
     }
 
-    public void setCells(Coordinates coordinates, Color value) {
+    public void setCell(Coordinates coordinates, Color value) {
         this.grid[coordinates.getY()][coordinates.getX()] = value;
     }
 

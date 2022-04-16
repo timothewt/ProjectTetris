@@ -37,20 +37,11 @@ public abstract class Tetrominoe {
 
     protected Grid moveDownGlobal(Grid grid, Coordinates[] position1, Coordinates[] position2, Coordinates[] position3, Coordinates[] position4) { // corresponds to every position according to the orientation
         switch (this.orientation % 4) {
-            case 0 -> {
-                grid = moveDownInGrid(grid, position1);
-            }
-            case 1 -> {
-                grid = moveDownInGrid(grid, position2);
-            }
-            case 2 -> {
-                grid = moveDownInGrid(grid, position3);
-            }
-            case 3 -> {
-                grid = moveDownInGrid(grid, position4);
-            }
-            default -> {
-            }
+            case 0 -> grid = moveDownInGrid(grid, position1);
+            case 1 -> grid = moveDownInGrid(grid, position2);
+            case 2 -> grid = moveDownInGrid(grid, position3);
+            case 3 -> grid = moveDownInGrid(grid, position4);
+            default -> {}
         }
         this.position.setY(this.position.getY() + 1);
         return grid;
@@ -64,22 +55,13 @@ public abstract class Tetrominoe {
 
     protected Grid moveSideGlobal(Grid grid, Coordinates[] position1, Coordinates[] position2, Coordinates[] position3, Coordinates[] position4, int direction) { // corresponds to every position according to the orientation
         switch (this.orientation % 4) {
-            case 0 -> {
-                grid = moveSideInGrid(grid, position1, direction);
-            }
-            case 1 -> {
-                grid = moveSideInGrid(grid, position2, direction);
-            }
-            case 2 -> {
-                grid = moveSideInGrid(grid, position3, direction);
-            }
-            case 3 -> {
-                grid = moveSideInGrid(grid, position4, direction);
-            }
-            default -> {
-            }
+            case 0 -> grid = moveSideInGrid(grid, position1, direction);
+            case 1 -> grid = moveSideInGrid(grid, position2, direction);
+            case 2 -> grid = moveSideInGrid(grid, position3, direction);
+            case 3 -> grid = moveSideInGrid(grid, position4, direction);
+            default -> {}
         }
-        this.position.setY(this.position.getY() + direction);
+        this.position.setX(this.position.getX() + direction);
         return grid;
     }
 
@@ -109,10 +91,10 @@ public abstract class Tetrominoe {
     }
 
     protected Grid setPieceCells(Grid grid, Color color,Coordinates firstPos, Coordinates secondPos, Coordinates thirdPos, Coordinates forthPos) {
-        grid.setCells(new Coordinates(this.position.getY() + firstPos.getY(), this.position.getX() + firstPos.getX()), color);
-        grid.setCells(new Coordinates(this.position.getY() + secondPos.getY(), this.position.getX() + secondPos.getX()), color);
-        grid.setCells(new Coordinates(this.position.getY() + thirdPos.getY(), this.position.getX() + thirdPos.getX()), color);
-        grid.setCells(new Coordinates(this.position.getY() + forthPos.getY(), this.position.getX() + forthPos.getX()), color);
+        grid.setCell(new Coordinates(this.position.getY() + firstPos.getY(), this.position.getX() + firstPos.getX()), color);
+        grid.setCell(new Coordinates(this.position.getY() + secondPos.getY(), this.position.getX() + secondPos.getX()), color);
+        grid.setCell(new Coordinates(this.position.getY() + thirdPos.getY(), this.position.getX() + thirdPos.getX()), color);
+        grid.setCell(new Coordinates(this.position.getY() + forthPos.getY(), this.position.getX() + forthPos.getX()), color);
         return grid;
     }
 
