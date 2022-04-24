@@ -120,7 +120,7 @@ public class GameModel {
     }
 
     private static void increaseDifficulty() {
-        if(1<=linesCompleted && linesCompleted< 20 && difficultyChange == 0) {
+        if(10<=linesCompleted && linesCompleted< 20 && difficultyChange == 0) {
             difficulty = min(difficulty+1,4);
             difficultyChange++;
         } else if(20<=linesCompleted && linesCompleted< 35 && difficultyChange == 1) {
