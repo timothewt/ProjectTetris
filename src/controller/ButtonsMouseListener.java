@@ -1,10 +1,7 @@
 package controller;
-
 import model.GameModel;
-
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import static model.GameModel.*;
 
 public class ButtonsMouseListener implements MouseListener {
@@ -19,30 +16,23 @@ public class ButtonsMouseListener implements MouseListener {
             GameModel.restartGame();
         }
     }
-    private boolean isInInterval(int n, int min, int max) {
-        return n>=min && n<=max;
-    }
     public void mousePressed(MouseEvent e) {
         int x=e.getX();
         int y=e.getY();
-        if (isInInterval(x,260,440) && isInInterval(y,265,320) && !pause) {
-            gameGUI.paintPausePressed(gameGUI.getGraphics());
-        } else if (isInInterval(x,260,440) && isInInterval(y,265,320) && pause) {
-            gameGUI.paintResumePressed(gameGUI.getGraphics());
+        if (isInInterval(x,260,440) && isInInterval(y,265,320)) {
+            gameGUI.paintPause(gameGUI.getGraphics(),true, pause);
         } else if (isInInterval(x,260,440) && isInInterval(y,335,390)) {
-            gameGUI.paintRestartPressed(gameGUI.getGraphics());
+            gameGUI.paintRestart(gameGUI.getGraphics(),true);
         }
     }
 
     public void mouseReleased(MouseEvent e) {
         int x=e.getX();
         int y=e.getY();
-        if (isInInterval(x,260,440) && isInInterval(y,265,320) && !pause) {
-            gameGUI.paintPauseReleased(gameGUI.getGraphics());
-        } else if (isInInterval(x,260,440) && isInInterval(y,265,320) && pause) {
-            gameGUI.paintResumeReleased(gameGUI.getGraphics());
+        if (isInInterval(x,260,440) && isInInterval(y,265,320)) {
+            gameGUI.paintPause(gameGUI.getGraphics(),false, pause);
         } else if (isInInterval(x,260,440) && isInInterval(y,335,390)) {
-            gameGUI.paintRestartReleased(gameGUI.getGraphics());
+            gameGUI.paintRestart(gameGUI.getGraphics(),false);
         }
     }
 

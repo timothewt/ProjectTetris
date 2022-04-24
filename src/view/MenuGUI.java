@@ -1,9 +1,6 @@
 package view;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-
 import static java.lang.Integer.parseInt;
 import static model.GameModel.*;
 

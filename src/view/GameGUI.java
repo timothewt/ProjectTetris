@@ -1,13 +1,8 @@
 package view;
-
 import model.Statistics;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
-
 import static java.lang.String.valueOf;
 import static model.GameModel.*;
 
@@ -26,37 +21,39 @@ public class GameGUI extends JFrame {
         g.setColor(Color.LIGHT_GRAY);
         g.drawRect(30,50,200,400);
         g.drawRect(260,50,80,200);
-        g.drawRect(360,50,80,40);
+        for (int i = 0; i < 4; i++) {
+            g.drawRect(360,50+53*i,80,40);
+        }
         g.drawString("Score",365,65);
-        g.drawRect(360, 103,80,40);
         g.drawString("Time",365,120);
-        g.drawRect(360, 156,80,40);
         g.drawString("High Score",365,171);
         g.drawString(valueOf(Statistics.bestScore),365,186);
-        g.drawRect(360, 210,80,40);
         g.drawString("Lines",365,225);
         g.drawRect(260,270,180,55);
-        g.drawString("Pause",335,300);
         g.drawRect(260,345,180,55);
-        g.drawString("Restart",333,375);
         g.drawRect(260,420,180,30);
+        g.drawString("Pause",334,300);
+        g.drawString("Restart",333,375);
         paintGrid(g);
         paintNext(g);
         paintScore(g);
         paintTime(g);
         paintLines(g);
         paintDifficulty(g);
+        paintNextLabel((Graphics2D) g);
+
+    }
+
+    private void paintNextLabel(Graphics2D g) {
         AffineTransform at = new AffineTransform();
         at.setToRotation(-Math.PI / 2);
-        Graphics2D g2d = (Graphics2D)g;
-        g2d.setTransform(at);
-        g2d.setColor(Color.LIGHT_GRAY);
-        g2d.setFont(g2d.getFont().deriveFont(g2d.getFont().getSize() * 2F));
-        g2d.drawString("NEXT", -130, 315);
+        g.setTransform(at);
+        g.setColor(Color.LIGHT_GRAY);
+        g.setFont(g.getFont().deriveFont(g.getFont().getSize() * 2F));
+        g.drawString("NEXT", -130, 315);
         at.setToRotation(0);
-        g2d.setTransform(at);
-        g2d.setFont(g2d.getFont().deriveFont(g2d.getFont().getSize() * 0.5F));
-
+        g.setTransform(at);
+        g.setFont(g.getFont().deriveFont(g.getFont().getSize() * 0.5F));
     }
 
     public void paintDifficulty(Graphics g) {
@@ -105,38 +102,27 @@ public class GameGUI extends JFrame {
         }
     }
 
-    public void paintPausePressed(Graphics g) {
-        g.setColor(Color.GRAY);
-        g.fillRect(261,271,178,53);
-        g.setColor(Color.LIGHT_GRAY);
-        g.drawString("Pause",335,300);
+    public void paintPause(Graphics g, boolean pressed, boolean isPaused) {
+        String s1 = isPaused ? "Resume" : "Pause";
+        String s2 = isPaused ? "Pause" : "Resume";
+        if (pressed) {
+            g.setColor(Color.GRAY);
+            g.fillRect(261,271,178,53);
+            g.setColor(Color.LIGHT_GRAY);
+            g.drawString(s1,334,300);
+        } else {
+            g.setColor(Color.BLACK);
+            g.fillRect(261,271,178,53);
+            g.setColor(Color.LIGHT_GRAY);
+            g.drawString(s2,334,300);
+        }
     }
-    public void paintPauseReleased(Graphics g) {
-        g.setColor(Color.BLACK);
-        g.fillRect(261,271,178,53);
-        g.setColor(Color.LIGHT_GRAY);
-        g.drawString("Resume",330,300);
-    }
-    public void paintResumePressed(Graphics g) {
-        g.setColor(Color.GRAY);
-        g.fillRect(261,271,178,53);
-        g.setColor(Color.LIGHT_GRAY);
-        g.drawString("Resume",330,300);
-    }
-    public void paintResumeReleased(Graphics g) {
-        g.setColor(Color.BLACK);
-        g.fillRect(261,271,178,53);
-        g.setColor(Color.LIGHT_GRAY);
-        g.drawString("Pause",335,300);
-    }
-    public void paintRestartPressed(Graphics g) {
-        g.setColor(Color.GRAY);
-        g.fillRect(261,346,178,53);
-        g.setColor(Color.LIGHT_GRAY);
-        g.drawString("Restart",333,375);
-    }
-    public void paintRestartReleased(Graphics g) {
-        g.setColor(Color.BLACK);
+    public void paintRestart(Graphics g, boolean pressed) {
+        if (pressed) {
+            g.setColor(Color.GRAY);
+        } else {
+            g.setColor(Color.BLACK);
+        }
         g.fillRect(261,346,178,53);
         g.setColor(Color.LIGHT_GRAY);
         g.drawString("Restart",333,375);

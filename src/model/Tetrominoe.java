@@ -97,12 +97,4 @@ public abstract class Tetrominoe {
     public Color getColor() {
         return color;
     }
-
-    public Coordinates getPosition() {
-        return position;
-    }
-
-    public int getOrientation() {
-        return orientation;
-    }
 }

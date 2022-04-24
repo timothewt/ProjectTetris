@@ -18,8 +18,8 @@ public class GameModel {
     public static Grid gameGrid;
     public static GameGUI gameGUI;
     public static Tetrominoe[] nextPieces;
-    public static volatile boolean hasPickedDifficulty;
     public static Tetrominoe currentPiece;
+    public static volatile boolean hasPickedDifficulty;
     public static int difficulty;
     private static int pickedDifficulty;
     private static int difficultyChange;
@@ -158,13 +158,12 @@ public class GameModel {
     }
 
     static public void waitMS(int ms) {
-        Clock clock = Clock.systemUTC();
-        long t1 = clock.millis();
-        while (clock.millis() - t1 < ms) {
+        long t1 = gameTimer.millis();
+        while (gameTimer.millis() - t1 < ms) {
             if(getGameTimeMS()%1000 < 10) {
                 gameGUI.paintTime(gameGUI.getGraphics());
             }
-            if (pause) {
+            if (pause) { 
                 long pauseStart = getGameTimeMS();
                 while (pause) {
                     Thread.onSpinWait();
@@ -176,6 +175,10 @@ public class GameModel {
                 break;
             }
         }
+    }
+
+    public static boolean isInInterval(int n, int min, int max) {
+        return n>=min && n<=max;
     }
 
     public static long getGameTimeMS() {

@@ -11,7 +11,7 @@ public class Statistics {
     public static int score;
     private int tetrisCount;
     public static int linesCompleted;
-    public static int bestScore;
+    public static long bestScore;
 
     Statistics() {
         this.tetrisCount = 0;
@@ -20,10 +20,10 @@ public class Statistics {
         bestScore = readHighScore();
     }
 
-    private int readHighScore() {
+    private long readHighScore() {
         try {
             Scanner scanner = new Scanner(new File("src/highscore.txt"));
-            return scanner.nextInt();
+            return scanner.nextLong();
         } catch (FileNotFoundException ignored) {
             return 0;
         }
