@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * Coordinates system in the grid
+ */
 public class Coordinates {
     private int y; // line
     private int x; // column
