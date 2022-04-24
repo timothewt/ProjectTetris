@@ -2,10 +2,6 @@ package model;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.lang.Math.*;
@@ -21,12 +17,12 @@ public class Statistics {
         this.tetrisCount = 0;
         score = 0;
         linesCompleted = 0;
-        bestScore = readBestScore();
+        bestScore = readHighScore();
     }
 
-    private int readBestScore() {
+    private int readHighScore() {
         try {
-            Scanner scanner = new Scanner(new File("src/bestscore.txt"));
+            Scanner scanner = new Scanner(new File("src/highscore.txt"));
             return scanner.nextInt();
         } catch (FileNotFoundException ignored) {
             return 0;

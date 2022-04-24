@@ -47,7 +47,7 @@ public class GameGUI extends JFrame {
         g2d.drawRect(450, 129,100,50);
         g2d.drawString("Time",455,149);
         g2d.drawRect(450,196,100,50);
-        g2d.drawString("Best Score",455,216);
+        g2d.drawString("High Score",455,216);
         g2d.drawString(valueOf(Statistics.bestScore),455,241);
         g2d.drawRect(450,262,100,50);
         g2d.drawString("Lines",455,282);
@@ -184,16 +184,16 @@ public class GameGUI extends JFrame {
         }
     }
 
-    public int displayMessage(String message) {
+    public int displayMessage(String title, String message, String opt1, String opt2) {
         JLabel label = new JLabel("<html><p align=\"center\">"+message);
         label.setHorizontalAlignment(JLabel.CENTER);
         return JOptionPane.showOptionDialog(this,
                 label,
-                "Game Over",
+                title,
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.PLAIN_MESSAGE,
                 null,     //do not use a custom Icon
-                new String[]{"New Game","Quit"},  //the titles of buttons
+                new String[]{opt1,opt2},  //the titles of buttons
                 ""); //default button title
     }
 

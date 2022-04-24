@@ -138,10 +138,10 @@ public class GameModel {
         gameGUI.removeKeyListener(KL);
         int n;
         if(Statistics.score > bestScore) {
-            n = gameGUI.displayMessage("You lost<br>New high score : "+Statistics.score+"!");
+            n = gameGUI.displayMessage("Game Over","You lost<br>New high score : "+Statistics.score+" !","New Game","Quit Game");
             writeBestScore(Statistics.score);
         } else {
-            n = gameGUI.displayMessage("You lost<br>Score : "+Statistics.score);
+            n = gameGUI.displayMessage("Game Over","You lost<br>Score : "+Statistics.score,"New Game","Quit Game");
         }
         if (n==0) {
             restartGame();
@@ -152,7 +152,7 @@ public class GameModel {
 
     private static void writeBestScore(int score) {
         try {
-            Writer wr = new FileWriter("src/bestscore.txt");
+            Writer wr = new FileWriter("src/highscore.txt");
             wr.write(valueOf(score));
             wr.close();
         } catch (IOException ignored){}
