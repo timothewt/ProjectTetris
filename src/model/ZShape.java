@@ -8,6 +8,7 @@ public class ZShape extends Tetrominoe {
         this.color = RED;
         this.position = new Coordinates(1,5);
         this.orientation = 0;
+        this.type = 1;
     }
 
     boolean canRotate(Grid grid) {
@@ -20,34 +21,33 @@ public class ZShape extends Tetrominoe {
         };
     }
 
-    public Grid rotate(Grid grid) {
+    public void rotate(Grid grid) {
         if (canRotate(grid)) {
             switch (this.orientation % 4) {
                 case 0 -> {
-                    grid = setPieceCells(grid, BLACK, new Coordinates(-1, -1), new Coordinates(-1, 0), new Coordinates(0, 0), new Coordinates(0, 1));
-                    grid = setPieceCells(grid, color, new Coordinates(-1, 1), new Coordinates(0, 0), new Coordinates(0, 1), new Coordinates(1, 0));
+                    setPieceCells(grid, BLACK, new Coordinates(-1, -1), new Coordinates(-1, 0), new Coordinates(0, 0), new Coordinates(0, 1));
+                    setPieceCells(grid, color, new Coordinates(-1, 1), new Coordinates(0, 0), new Coordinates(0, 1), new Coordinates(1, 0));
                 }
                 case 1 -> {
-                    grid = setPieceCells(grid, BLACK, new Coordinates(-1, 1), new Coordinates(0, 1), new Coordinates(0, 0), new Coordinates(1, 0));
-                    grid = setPieceCells(grid, color, new Coordinates(0, -1), new Coordinates(0, 0), new Coordinates(1, 0), new Coordinates(1, 1));
+                    setPieceCells(grid, BLACK, new Coordinates(-1, 1), new Coordinates(0, 1), new Coordinates(0, 0), new Coordinates(1, 0));
+                    setPieceCells(grid, color, new Coordinates(0, -1), new Coordinates(0, 0), new Coordinates(1, 0), new Coordinates(1, 1));
                 }
                 case 2 -> {
-                    grid = setPieceCells(grid, BLACK, new Coordinates(0, -1), new Coordinates(0, 0), new Coordinates(1, 0), new Coordinates(1, 1));
-                    grid = setPieceCells(grid, color, new Coordinates(-1, 0), new Coordinates(0, -1), new Coordinates(0, 0), new Coordinates(1, -1));
+                    setPieceCells(grid, BLACK, new Coordinates(0, -1), new Coordinates(0, 0), new Coordinates(1, 0), new Coordinates(1, 1));
+                    setPieceCells(grid, color, new Coordinates(-1, 0), new Coordinates(0, -1), new Coordinates(0, 0), new Coordinates(1, -1));
                 }
                 case 3 -> {
-                    grid = setPieceCells(grid, BLACK, new Coordinates(-1, 0), new Coordinates(0, 0), new Coordinates(0, -1), new Coordinates(1, -1));
-                    grid = setPieceCells(grid, color, new Coordinates(-1, -1), new Coordinates(-1, 0), new Coordinates(0, 0), new Coordinates(0, 1));
+                    setPieceCells(grid, BLACK, new Coordinates(-1, 0), new Coordinates(0, 0), new Coordinates(0, -1), new Coordinates(1, -1));
+                    setPieceCells(grid, color, new Coordinates(-1, -1), new Coordinates(-1, 0), new Coordinates(0, 0), new Coordinates(0, 1));
                 }
                 default -> {
                 }
             }
             orientation++;
         }
-        return grid;
     }
 
-    boolean canMoveDown(Grid grid) {
+    public boolean canMoveDown(Grid grid) {
         return switch (this.orientation % 4) {
             case 0 -> areCellsFree(grid, new Coordinates(0, -1), new Coordinates(1, 0), new Coordinates(1, 1));
             case 1 -> areCellsFree(grid, new Coordinates(2, 0), new Coordinates(1, 1));
@@ -57,14 +57,13 @@ public class ZShape extends Tetrominoe {
         };
     }
 
-    public Grid moveDown(Grid grid) {
+    public void moveDown(Grid grid) {
         if (canMoveDown(grid)) {
-            grid = moveDownGlobal(grid, new Coordinates[]{new Coordinates(-1,-1),new Coordinates(-1,0),new Coordinates(0,0),new Coordinates(0,1)},
+            moveDownGlobal(grid, new Coordinates[]{new Coordinates(-1,-1),new Coordinates(-1,0),new Coordinates(0,0),new Coordinates(0,1)},
                     new Coordinates[]{new Coordinates(-1,1),new Coordinates(0,1),new Coordinates(0,0),new Coordinates(1,0)},
                     new Coordinates[]{new Coordinates(0,-1),new Coordinates(0,0),new Coordinates(1,0),new Coordinates(1,1)},
                     new Coordinates[]{new Coordinates(-1,0),new Coordinates(0,0),new Coordinates(0,-1),new Coordinates(1,-1)});
         }
-        return grid;
     }
 
     protected boolean canMoveSide(Grid grid, int direction) {
@@ -87,24 +86,22 @@ public class ZShape extends Tetrominoe {
         }
     }
 
-    public Grid moveSide(Grid grid, int direction) {
+    public void moveSide(Grid grid, int direction) {
         if (canMoveSide(grid, direction)) {
-            grid = moveSideGlobal(grid, new Coordinates[]{new Coordinates(-1,-1),new Coordinates(-1,0),new Coordinates(0,0),new Coordinates(0,1)},
+            moveSideGlobal(grid, new Coordinates[]{new Coordinates(-1,-1),new Coordinates(-1,0),new Coordinates(0,0),new Coordinates(0,1)},
                     new Coordinates[]{new Coordinates(-1,1),new Coordinates(0,1),new Coordinates(0,0),new Coordinates(1,0)},
                     new Coordinates[]{new Coordinates(0,-1),new Coordinates(0,0),new Coordinates(1,0),new Coordinates(1,1)},
                     new Coordinates[]{new Coordinates(-1,0),new Coordinates(0,0),new Coordinates(0,-1),new Coordinates(1,-1)}, direction);
         }
-        return grid;
     }
 
     boolean canPlacePiece(Grid grid) {
-        return areCellsFree(grid, new Coordinates(-1,-1), new Coordinates(0,-1), new Coordinates(0,0), new Coordinates(1,0));
+        return areCellsFree(grid, new Coordinates(-1,-1), new Coordinates(-1,0), new Coordinates(0,0), new Coordinates(0,1));
     }
 
-    public Grid placePiece(Grid grid) {
+    public void placePiece(Grid grid) {
         if (canPlacePiece(grid)) {
-            grid = setPieceCells(grid, this.color, new Coordinates(-1,-1), new Coordinates(-1,0), new Coordinates(0,0), new Coordinates(0,1));
+            setPieceCells(grid, this.color, new Coordinates(-1,-1), new Coordinates(-1,0), new Coordinates(0,0), new Coordinates(0,1));
         }
-        return grid;
     }
 }

@@ -7,6 +7,7 @@ public abstract class Tetrominoe {
     protected Color color;
     protected Coordinates position;
     protected int orientation;
+    public int type;
 
     public Tetrominoe() {
         this.color = BLACK;
@@ -21,54 +22,50 @@ public abstract class Tetrominoe {
 
     abstract boolean canRotate(Grid grid);
 
-    abstract public Grid rotate(Grid grid);
+    abstract public void rotate(Grid grid);
 
-    abstract boolean canMoveDown(Grid grid);
+    public abstract boolean canMoveDown(Grid grid);
 
-    abstract public Grid moveDown(Grid grid);
+    abstract public void moveDown(Grid grid);
 
     abstract boolean canMoveSide(Grid grid, int direction);
 
-    abstract public Grid moveSide(Grid grid, int direction);
+    abstract public void moveSide(Grid grid, int direction);
 
     abstract boolean canPlacePiece(Grid grid);
 
-    abstract public Grid placePiece(Grid grid);
+    abstract public void placePiece(Grid grid);
 
-    protected Grid moveDownGlobal(Grid grid, Coordinates[] position1, Coordinates[] position2, Coordinates[] position3, Coordinates[] position4) { // corresponds to every position according to the orientation
+    protected void moveDownGlobal(Grid grid, Coordinates[] position1, Coordinates[] position2, Coordinates[] position3, Coordinates[] position4) { // corresponds to every position according to the orientation
         switch (this.orientation % 4) {
-            case 0 -> grid = moveDownInGrid(grid, position1);
-            case 1 -> grid = moveDownInGrid(grid, position2);
-            case 2 -> grid = moveDownInGrid(grid, position3);
-            case 3 -> grid = moveDownInGrid(grid, position4);
+            case 0 -> moveDownInGrid(grid, position1);
+            case 1 -> moveDownInGrid(grid, position2);
+            case 2 -> moveDownInGrid(grid, position3);
+            case 3 -> moveDownInGrid(grid, position4);
             default -> {}
         }
         this.position.setY(this.position.getY() + 1);
-        return grid;
     }
 
-    private Grid moveDownInGrid(Grid grid, Coordinates[] position) {
-        grid = setPieceCells(grid, BLACK, new Coordinates(position[0].getY(), position[0].getX()), new Coordinates(position[1].getY(), position[1].getX()), new Coordinates(position[2].getY(), position[2].getX()), new Coordinates(position[3].getY(), position[3].getX()));
-        grid = setPieceCells(grid, color, new Coordinates(position[0].getY() + 1, position[0].getX()), new Coordinates(position[1].getY() + 1, position[1].getX()), new Coordinates(position[2].getY() + 1, position[2].getX()), new Coordinates(position[3].getY() + 1, position[3].getX()));
-        return grid;
+    private void moveDownInGrid(Grid grid, Coordinates[] position) {
+        setPieceCells(grid, BLACK, new Coordinates(position[0].getY(), position[0].getX()), new Coordinates(position[1].getY(), position[1].getX()), new Coordinates(position[2].getY(), position[2].getX()), new Coordinates(position[3].getY(), position[3].getX()));
+        setPieceCells(grid, color, new Coordinates(position[0].getY() + 1, position[0].getX()), new Coordinates(position[1].getY() + 1, position[1].getX()), new Coordinates(position[2].getY() + 1, position[2].getX()), new Coordinates(position[3].getY() + 1, position[3].getX()));
     }
 
-    protected Grid moveSideGlobal(Grid grid, Coordinates[] position1, Coordinates[] position2, Coordinates[] position3, Coordinates[] position4, int direction) { // corresponds to every position according to the orientation
+    protected void moveSideGlobal(Grid grid, Coordinates[] position1, Coordinates[] position2, Coordinates[] position3, Coordinates[] position4, int direction) { // corresponds to every position according to the orientation
         switch (this.orientation % 4) {
-            case 0 -> grid = moveSideInGrid(grid, position1, direction);
-            case 1 -> grid = moveSideInGrid(grid, position2, direction);
-            case 2 -> grid = moveSideInGrid(grid, position3, direction);
-            case 3 -> grid = moveSideInGrid(grid, position4, direction);
+            case 0 -> moveSideInGrid(grid, position1, direction);
+            case 1 -> moveSideInGrid(grid, position2, direction);
+            case 2 -> moveSideInGrid(grid, position3, direction);
+            case 3 -> moveSideInGrid(grid, position4, direction);
             default -> {}
         }
         this.position.setX(this.position.getX() + direction);
-        return grid;
     }
 
-    private Grid moveSideInGrid(Grid grid, Coordinates[] position, int direction) {
-        grid = setPieceCells(grid, BLACK, new Coordinates(position[0].getY(), position[0].getX()), new Coordinates(position[1].getY(), position[1].getX()), new Coordinates(position[2].getY(), position[2].getX()), new Coordinates(position[3].getY(), position[3].getX()));
-        grid = setPieceCells(grid, color, new Coordinates(position[0].getY(), position[0].getX() + direction), new Coordinates(position[1].getY(), position[1].getX() + direction), new Coordinates(position[2].getY(), position[2].getX() + direction), new Coordinates(position[3].getY(), position[3].getX() + direction));
-        return grid;
+    private void moveSideInGrid(Grid grid, Coordinates[] position, int direction) {
+        setPieceCells(grid, BLACK, new Coordinates(position[0].getY(), position[0].getX()), new Coordinates(position[1].getY(), position[1].getX()), new Coordinates(position[2].getY(), position[2].getX()), new Coordinates(position[3].getY(), position[3].getX()));
+        setPieceCells(grid, color, new Coordinates(position[0].getY(), position[0].getX() + direction), new Coordinates(position[1].getY(), position[1].getX() + direction), new Coordinates(position[2].getY(), position[2].getX() + direction), new Coordinates(position[3].getY(), position[3].getX() + direction));
     }
 
     protected boolean areCellsFree(Grid grid, Coordinates firstPos) {
@@ -90,12 +87,11 @@ public abstract class Tetrominoe {
                 && grid.isFree(new Coordinates(this.position.getY() + forthPos.getY(),this.position.getX() + forthPos.getX()));
     }
 
-    protected Grid setPieceCells(Grid grid, Color color,Coordinates firstPos, Coordinates secondPos, Coordinates thirdPos, Coordinates forthPos) {
+    protected void setPieceCells(Grid grid, Color color,Coordinates firstPos, Coordinates secondPos, Coordinates thirdPos, Coordinates forthPos) {
         grid.setCell(new Coordinates(this.position.getY() + firstPos.getY(), this.position.getX() + firstPos.getX()), color);
         grid.setCell(new Coordinates(this.position.getY() + secondPos.getY(), this.position.getX() + secondPos.getX()), color);
         grid.setCell(new Coordinates(this.position.getY() + thirdPos.getY(), this.position.getX() + thirdPos.getX()), color);
         grid.setCell(new Coordinates(this.position.getY() + forthPos.getY(), this.position.getX() + forthPos.getX()), color);
-        return grid;
     }
 
     public Color getColor() {

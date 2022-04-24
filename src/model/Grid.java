@@ -1,5 +1,4 @@
 package model;
-
 import java.awt.*;
 
 import static java.awt.Color.*;
@@ -34,7 +33,10 @@ public class Grid {
 
     public void clearLine(int lineNb) {
         for (int i = 0; i<10; i++) {
-            this.grid[lineNb][10] = BLACK;
+            this.grid[lineNb][i] = BLACK;
+        }
+        for (int i = lineNb; i>0; i--) {
+            System.arraycopy(this.grid[i - 1], 0, this.grid[i], 0, 10);
         }
     }
 
@@ -47,6 +49,9 @@ public class Grid {
                     isComplete = 0;
                     break;
                 }
+            }
+            if(isComplete == 1) {
+                clearLine(i);
             }
             completeLines += isComplete;
         }
@@ -64,6 +69,7 @@ public class Grid {
             }
             System.out.print("|\n");
         }
+        System.out.println();
     }
 
     public Color[][] getGrid() {
