@@ -120,7 +120,6 @@ public class GameModel {
     }
 
     private static void increaseDifficulty() {
-        System.out.println(difficultyChange);
         if(1<=linesCompleted && linesCompleted< 20 && difficultyChange == 0) {
             difficulty = min(difficulty+1,4);
             difficultyChange++;
