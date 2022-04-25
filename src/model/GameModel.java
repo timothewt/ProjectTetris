@@ -147,13 +147,13 @@ public class GameModel {
      * Increases difficulty if a certain number of lines is reached for the game to be hard enough
      */
     private static void increaseDifficulty() {
-        if(isInInterval(linesCompleted,10,19) && difficultyChange == 0) {
+        if(isInInterval(linesCompleted,10,19) && difficultyChange == 0) { // if the player reaches more than 10 lines and the difficulty still hasn't changed, increases
             difficulty = min(difficulty+1,4); // If the difficulty is above 4, picks 4
             difficultyChange++;
-        } else if(isInInterval(linesCompleted,20,34) && difficultyChange == 1) {
+        } else if(isInInterval(linesCompleted,20,34) && difficultyChange == 1) { // if the player reaches more than 20 lines and the difficulty changed only once, increases
             difficulty = min(difficulty+1,4);
             difficultyChange++;
-        } else if(35 <= linesCompleted && difficultyChange == 2) {
+        } else if(35 <= linesCompleted && difficultyChange == 2) { // if the player reaches more than 10 lines and the difficulty changed only twice, increases
             difficulty = min(difficulty+1,4);
             difficultyChange++;
         }
