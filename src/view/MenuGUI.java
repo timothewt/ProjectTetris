@@ -1,7 +1,7 @@
 package view;
-
 import javax.swing.*;
 import java.awt.*;
+
 import static java.lang.Integer.parseInt;
 import static model.GameModel.*;
 
@@ -9,11 +9,7 @@ import static model.GameModel.*;
  * Menu window of the game where the player picks the difficulty
  */
 public class MenuGUI extends JFrame {
-    JRadioButton[] radioButtons;
-    JRadioButton jRadioButton1; // radio buttons of difficulties
-    JRadioButton jRadioButton2;
-    JRadioButton jRadioButton3;
-    JRadioButton jRadioButton4;
+    JRadioButton[] radioButtons;// radio buttons of difficulties
     JButton jButton; // button to start the game
     ButtonGroup G1; // button group of radio buttons
     JLabel L1; // "Pick difficulty" label
