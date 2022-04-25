@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Coordinates system in the grid
+ * Coordinates system in the grid, Y being the lines and X the columns
  */
 public class Coordinates {
     private int y; // line

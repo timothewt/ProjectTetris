@@ -1,6 +1,10 @@
 package model;
-
 import static java.awt.Color.*;
+
+/**
+ * Class of the pieces with the shape of a L, inheriting of the Tetrominoe class
+ * Note : all the other shapes (except O) have the same documentation so see TShape class for doc
+ */
 
 public class LShape extends Tetrominoe {
 

@@ -69,15 +69,15 @@ public class GameModel {
      * Displays the game window and starts the main game loop
      */
     public void startGame() {
-        gameGUI = new GameGUI();
-        loop();
+        gameGUI = new GameGUI(); // creates an instance of the game window (game GUI)
+        loop(); // starts the game loop
     }
 
     /**
      * Pauses the game by disabling the key controls
      */
     public static void pauseGame() {
-        gameGUI.removeKeyListener(KL);
+        gameGUI.removeKeyListener(KL); // removes the listener so the user can't interact with the piece anymore
         pause = true;
     }
 
@@ -85,7 +85,7 @@ public class GameModel {
      * Resumes the game by enabling the key controls
      */
     public static void resumeGame() {
-        gameGUI.addKeyListener(KL);
+        gameGUI.addKeyListener(KL); // adds the listener so the user can interact with the piece
         pause = false;
     }
 
