@@ -225,6 +225,7 @@ public class GameGUI extends JFrame {
     public GameGUI() {
         this.setLayout(null);
         this.setTitle("Tetris"); // sets the title of the window
+        this.setIconImage((new ImageIcon("src/logo.png")).getImage()); // window icon
         this.setSize(465,480); // sets the size of the window
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // the program stops when the user closes the window
         this.setVisible(true); // Sets the window visible

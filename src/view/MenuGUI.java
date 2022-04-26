@@ -17,6 +17,7 @@ public class MenuGUI extends JFrame {
     public MenuGUI() {
         this.setLayout(null);
         this.setTitle("Tetris"); // title of the window
+        this.setIconImage((new ImageIcon("src/logo.png")).getImage()); // window icon
 
         radioButtons = new JRadioButton[4]; // radio buttons
         G1 = new ButtonGroup(); // Button group of radio buttons

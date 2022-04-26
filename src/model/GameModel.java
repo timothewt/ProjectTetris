@@ -198,7 +198,7 @@ public class GameModel {
     static public void waitMS(int ms) {
         long t1 = gameTimer.millis(); // starting time of the loop
         while (gameTimer.millis() - t1 < ms) { // while time isn't reached, loops
-            if (getGameTimeMS()%1000 < 10) { // If the game timer reaches a new second, updates the time display
+            if (getGameTimeMS()%1000 < 20) { // If the game timer reaches a new second, updates the time display
                 gameGUI.paintTime(gameGUI.getGraphics());
             }
             if (pause) { // If the game is paused, loops while it's still paused
