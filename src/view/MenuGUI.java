@@ -13,6 +13,7 @@ public class MenuGUI extends JFrame {
     JButton jButton; // button to start the game
     ButtonGroup G1; // button group of radio buttons
     JLabel L1; // "Pick difficulty" label
+    JLabel L2; // Controls label
 
     public MenuGUI() {
         this.setLayout(null);
@@ -46,7 +47,12 @@ public class MenuGUI extends JFrame {
         L1.setBounds(100, 0, 100, 50); // setting coordinates and size of the label
         this.add(L1); // adding the label to the window
 
-        this.setSize(300,350); // setting the size of the window
+        L2 = new JLabel("<html>Controls :<br>[↑] Rotate<br>[←][→] Left/Right<br>[↓] Move down<br>[⎵] Harddrop</html>"); // controls of the Tetrominoes
+        L2.setForeground(Color.WHITE); // setting font color of the label
+        L2.setBounds(50,300,200,100);
+        this.add(L2);
+
+        this.setSize(300,450); // setting the size of the window
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // when the user leaves the window the program stops
 
         this.getContentPane().setBackground(Color.BLACK); // sets the background to black
