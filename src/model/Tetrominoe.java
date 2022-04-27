@@ -4,6 +4,7 @@ import static java.awt.Color.*;
 
 /**
  * Abstract class of all Tetrominoes, common methods are written here and the ones depending on the pieces shapes are written in other classes.
+ * To see the order of pieces rotations, see PiecesRotation.png
  * Only OShape and TShape are documented because the other pieces have the same documentation as the TShape (OShape is special)
  */
 public abstract class Tetrominoe {
