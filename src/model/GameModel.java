@@ -47,7 +47,6 @@ public class GameModel {
         hasLost = false;
         stats = new Statistics();
         gameTimer = Clock.systemUTC();
-        msStart = gameTimer.millis();
         pause = false;
         hardDrop = false;
     }
@@ -69,6 +68,7 @@ public class GameModel {
      * Displays the game window and starts the main game loop
      */
     public void startGame() {
+        msStart = gameTimer.millis(); // sets time to 0
         gameGUI = new GameGUI(); // creates an instance of the game window (game GUI)
         loop(); // starts the game loop
     }
